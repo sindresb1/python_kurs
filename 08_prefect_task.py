@@ -71,3 +71,5 @@ print(example_task(5, 3))
 #     return "Success!"
 
 # print(unreliable_function())
+
+# Lær mer om dekoratorer her: https://realpython.com/primer-on-python-decorators/
