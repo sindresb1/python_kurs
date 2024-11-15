@@ -11,3 +11,6 @@ def parent():
     first_child()
 
 parent()
+
+# # Dette vil ikke fungere:
+# first_child()
