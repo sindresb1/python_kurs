@@ -1,47 +1,49 @@
-def _set_bank_codes(self, bank_codes_sf: str | None) -> list[int]:
-    """Setter bankkoder som skal lastes."""
-    if self.bank_codes == "ALLE_BANKER":
-        return [
-            int(code)
-            for code in get_value_from_samspar_config_key(key="sdvh_banker")  # type: ignore
-        ]
-    elif self.bank_codes:
-        return [int(code) for code in self.bank_codes]
-    elif bank_codes_sf == "ALLE_BANKER":
-        return [
-            int(code)
-            for code in get_value_from_samspar_config_key(key="sdvh_banker")  # type: ignore
-        ]
-    elif bank_codes_sf is not None:
-        return [int(code) for code in bank_codes_sf.split(",")]
-    else:
-        raise ValueError(
-            "Må spesifisere banker. Hvis ikke bankspesifikk, sett ALLE_BANKER i styretabellen."
-        )
+# Utgangspunkt:
+# def _set_bank_codes(self, bank_codes_sf: str | None) -> list[int]:
+#     """Setter bankkoder som skal lastes."""
+#     if self.bank_codes == "ALLE_BANKER":
+#         return [
+#             int(code)
+#             for code in get_value_from_samspar_config_key(key="sdvh_banker")  # type: ignore
+#         ]
+#     elif self.bank_codes:
+#         return [int(code) for code in self.bank_codes]
+#     elif bank_codes_sf == "ALLE_BANKER":
+#         return [
+#             int(code)
+#             for code in get_value_from_samspar_config_key(key="sdvh_banker")  # type: ignore
+#         ]
+#     elif bank_codes_sf is not None:
+#         return [int(code) for code in bank_codes_sf.split(",")]
+#     else:
+#         raise ValueError(
+#             "Må spesifisere banker. Hvis ikke bankspesifikk, sett ALLE_BANKER i styretabellen."
+#         )
+
+# Første PR:
+# def _set_bank_codes(self, bank_codes_sf: str | None) -> list[int]:
+#     """Setter bankkoder som skal lastes."""
+#     if self.bank_codes != "ALLE_BANKER" and self.bank_codes:
+#         return [int(code) for code in self.bank_codes]
+#     elif self.bank_codes == "ALLE_BANKER" and bank_codes_sf not in [
+#         None,
+#         "ALLE_BANKER",
+#     ]:
+#         return [int(code) for code in bank_codes_sf.split(",")]
+#     elif self.bank_codes == "ALLE_BANKER" or bank_codes_sf == "ALLE_BANKER":
+#         return [
+#             int(code)
+#             for code in get_value_from_samspar_config_key(key="sdvh_banker")
+#         ]
+#     elif bank_codes_sf not in [None, "ALLE_BANKER"]:
+#         return [int(code) for code in bank_codes_sf.split(",")]
+#     else:
+#         raise ValueError(
+#             "Må spesifisere banker. Hvis ikke bankspesifikk, sett ALLE_BANKER i styretabellen."
+#         )
 
 
-def _set_bank_codes(self, bank_codes_sf: str | None) -> list[int]:
-    """Setter bankkoder som skal lastes."""
-    if self.bank_codes != "ALLE_BANKER" and self.bank_codes:
-        return [int(code) for code in self.bank_codes]
-    elif self.bank_codes == "ALLE_BANKER" and bank_codes_sf not in [
-        None,
-        "ALLE_BANKER",
-    ]:
-        return [int(code) for code in bank_codes_sf.split(",")]
-    elif self.bank_codes == "ALLE_BANKER" or bank_codes_sf == "ALLE_BANKER":
-        return [
-            int(code)
-            for code in get_value_from_samspar_config_key(key="sdvh_banker")
-        ]
-    elif bank_codes_sf not in [None, "ALLE_BANKER"]:
-        return [int(code) for code in bank_codes_sf.split(",")]
-    else:
-        raise ValueError(
-            "Må spesifisere banker. Hvis ikke bankspesifikk, sett ALLE_BANKER i styretabellen."
-        )
-
-
+# Endelig versjon:
 def _parse_bank_codes(self, codes: str | list[str]) -> list[int]:
     """Parser bankkoder til en liste med integers."""
     if isinstance(codes, str):

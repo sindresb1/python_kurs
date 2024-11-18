@@ -9,3 +9,5 @@ def greet_bob(greeter_func):
 
 print(greet_bob(say_hello))
 print(greet_bob(be_awesome))
+
+print(say_hello)
